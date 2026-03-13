@@ -24,6 +24,9 @@ classifiers = [
     "Typing :: Typed",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest>=7", "mypy>=1"]
+
 [project.urls]
 Repository = "https://github.com/agentine/termpaint"
 

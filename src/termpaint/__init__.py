@@ -15,6 +15,12 @@ from .ansi import (
     OSC,
     BEL,
 )
+from .initialise import (
+    init,
+    deinit,
+    reinit,
+    just_fix_windows_console,
+)
 
 __all__ = [
     "init",
@@ -36,32 +42,6 @@ __all__ = [
 ]
 
 __version__ = "0.1.0"
-
-
-def init(
-    autoreset: bool = False,
-    convert: bool | None = None,
-    strip: bool | None = None,
-    wrap: bool = True,
-) -> None:
-    """Initialize termpaint. Wraps stdout/stderr on Windows."""
-    # Stub — full implementation in Phase 4
-    pass
-
-
-def deinit() -> None:
-    """Undo the effects of init()."""
-    pass
-
-
-def reinit() -> None:
-    """Re-initialize after deinit()."""
-    pass
-
-
-def just_fix_windows_console() -> None:
-    """Enable ANSI support on Windows. No-op on POSIX. Idempotent."""
-    pass
 
 
 class _ColoramaText:

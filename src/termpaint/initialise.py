@@ -34,13 +34,13 @@ def init(
         _original_stdout = sys.stdout
         _original_stderr = sys.stderr
 
-        sys.stdout = AnsiToWin32(  # type: ignore[assignment]
+        sys.stdout = AnsiToWin32(
             _original_stdout,
             convert=convert,
             strip=strip,
             autoreset=autoreset,
         ).stream
-        sys.stderr = AnsiToWin32(  # type: ignore[assignment]
+        sys.stderr = AnsiToWin32(
             _original_stderr,
             convert=convert,
             strip=strip,

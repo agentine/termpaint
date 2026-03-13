@@ -8,6 +8,7 @@ import sys
 from typing import Any, TextIO
 
 from .ansi import Style
+from .environ import is_force_color, is_no_color
 
 ANSI_CSI_RE = re.compile(r"\001?\033\[(\d+;)*\d*[A-Za-z]\002?")
 ANSI_OSC_RE = re.compile(r"\001?\033\].*?(\007|\033\\)\002?")
@@ -69,19 +70,33 @@ class AnsiToWin32:
         self.autoreset = autoreset
         self.on_stderr = wrapped is sys.__stderr__
 
-        # Determine if we should strip and/or convert
+        # Determine if we should strip and/or convert.
+        # NO_COLOR and FORCE_COLOR environment variables take precedence.
         on_windows = platform.system() == "Windows"
         is_tty = hasattr(wrapped, "isatty") and wrapped.isatty()
+        no_color = is_no_color()
+        force_color = is_force_color()
 
         if strip is None:
-            # Auto-detect: strip if we're on Windows with a real console
-            self.strip = on_windows and is_tty and convert is not False
+            if no_color:
+                # NO_COLOR: strip all ANSI sequences
+                self.strip = True
+            elif force_color:
+                # FORCE_COLOR: never strip, even if not a TTY
+                self.strip = False
+            else:
+                # Auto-detect: strip if we're on Windows with a real console
+                self.strip = on_windows and is_tty and convert is not False
         else:
             self.strip = strip
 
         if convert is None:
-            # Auto-detect: convert if on Windows with a real console
-            self.convert = on_windows and is_tty
+            if no_color:
+                # NO_COLOR: do not convert, just strip
+                self.convert = False
+            else:
+                # Auto-detect: convert if on Windows with a real console
+                self.convert = on_windows and is_tty
         else:
             self.convert = convert
 
@@ -94,7 +109,7 @@ class AnsiToWin32:
     def _init_win32(self) -> None:
         """Set up Win32 console dispatch table."""
         try:
-            from . import winterm  # type: ignore[attr-defined]
+            from . import winterm
             wt = winterm.win_term
         except (ImportError, AttributeError):
             self.convert = False
@@ -232,7 +247,7 @@ class AnsiToWin32:
             pt = match.group(2)
             if ps in (0, 2):
                 try:
-                    from . import win32  # type: ignore[attr-defined]
+                    from . import win32
                     win32.SetConsoleTitle(pt)
                 except (ImportError, AttributeError):
                     pass
@@ -241,7 +256,7 @@ class AnsiToWin32:
         """Reset all styles."""
         if self.convert:
             try:
-                from . import winterm  # type: ignore[attr-defined]
+                from . import winterm
                 winterm.win_term.reset_all(self.on_stderr)
             except (ImportError, AttributeError):
                 pass

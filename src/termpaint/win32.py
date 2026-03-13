@@ -223,8 +223,8 @@ def enable_vt_processing(fd: int) -> bool:
         return False
     try:
         import ctypes
-        import msvcrt  # type: ignore[import-not-found]
-        handle = msvcrt.get_osfhandle(fd)
+        import msvcrt
+        handle = msvcrt.get_osfhandle(fd)  # type: ignore[attr-defined]
         mode = ctypes.c_ulong(0)
         if not kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
             return False

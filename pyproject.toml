@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "termpaint"
+version = "0.1.0"
+description = "Drop-in replacement for colorama with 256-color, true color, and type annotations"
+license = "MIT"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Terminals",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Repository = "https://github.com/agentine/termpaint"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/termpaint"]
+
+[tool.mypy]
+strict = true
+python_version = "3.9"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

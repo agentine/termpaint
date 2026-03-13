@@ -15,6 +15,8 @@ from .ansi import (
     OSC,
     BEL,
 )
+from typing import Any
+
 from .initialise import (
     init,
     deinit,
@@ -47,17 +49,17 @@ __version__ = "0.1.0"
 class _ColoramaText:
     """Context manager for colorama_text()."""
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         self._kwargs = kwargs
 
     def __enter__(self) -> "_ColoramaText":
-        init()
+        init(**self._kwargs)
         return self
 
     def __exit__(self, *args: object) -> None:
         deinit()
 
 
-def colorama_text(**kwargs: object) -> _ColoramaText:
+def colorama_text(**kwargs: Any) -> _ColoramaText:
     """Context manager that calls init() on enter and deinit() on exit."""
     return _ColoramaText(**kwargs)

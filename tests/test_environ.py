@@ -71,9 +71,11 @@ class TestDetectColorSupport:
 
     def test_empty_env_no_tty(self) -> None:
         with mock.patch.dict(os.environ, {}, clear=True):
-            with mock.patch("sys.stdout") as mock_stdout:
-                mock_stdout.isatty.return_value = False
-                assert detect_color_support() == 0
+            with mock.patch("chromapaint.environ.platform") as mock_platform:
+                mock_platform.system.return_value = "Linux"
+                with mock.patch("sys.stdout") as mock_stdout:
+                    mock_stdout.isatty.return_value = False
+                    assert detect_color_support() == 0
 
     def test_empty_env_with_tty(self) -> None:
         with mock.patch.dict(os.environ, {}, clear=True):

@@ -1,6 +1,6 @@
 """Tests for win32 module — graceful behavior on non-Windows."""
 
-from termpaint.win32 import (
+from chromapaint.win32 import (
     winapi_test,
     enable_vt_processing,
     GetConsoleScreenBufferInfo,
@@ -17,7 +17,7 @@ from termpaint.win32 import (
     STD_OUTPUT_HANDLE,
     STD_ERROR_HANDLE,
 )
-from termpaint.winterm import WinColor, WinStyle, WinTerm
+from chromapaint.winterm import WinColor, WinStyle, WinTerm
 
 
 class TestWin32Graceful:

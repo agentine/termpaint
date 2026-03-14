@@ -1,10 +1,10 @@
-"""Compatibility shim: ``import termpaint as colorama``."""
+"""Compatibility shim: ``import chromapaint as colorama``."""
 
 from __future__ import annotations
 
 # Re-export everything so existing code using ``import colorama`` can switch
-# to ``import termpaint as colorama`` with zero changes.
-from termpaint import (  # noqa: F401
+# to ``import chromapaint as colorama`` with zero changes.
+from chromapaint import (  # noqa: F401
     Fore,
     Back,
     Style,

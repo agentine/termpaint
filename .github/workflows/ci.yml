@@ -30,4 +30,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e . mypy
-      - run: mypy src/termpaint/
+      - run: mypy src/chromapaint/

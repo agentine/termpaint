@@ -1,7 +1,7 @@
 """Tests for AnsiToWin32 and StreamWrapper."""
 
 import io
-from termpaint.ansitowin32 import (
+from chromapaint.ansitowin32 import (
     AnsiToWin32,
     StreamWrapper,
     ANSI_CSI_RE,

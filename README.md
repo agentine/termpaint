@@ -1,14 +1,14 @@
-# termpaint
+# chromapaint
 
 Drop-in replacement for [colorama](https://github.com/tartley/colorama) with 256-color, true color, and full type annotations.
 
 ```python
-import termpaint as colorama  # zero-change migration
+import chromapaint as colorama  # zero-change migration
 ```
 
-## Why termpaint?
+## Why chromapaint?
 
-colorama is one of the most-downloaded Python packages (262M downloads/month, 1.4M dependents) but has been effectively unmaintained since October 2022. termpaint replaces it with:
+colorama is one of the most-downloaded Python packages (262M downloads/month, 1.4M dependents) but has been effectively unmaintained since October 2022. chromapaint replaces it with:
 
 - **Python 3.9+** — no Python 2 compatibility cruft
 - **Full type annotations** — mypy-strict clean, IDE-friendly
@@ -22,7 +22,7 @@ colorama is one of the most-downloaded Python packages (262M downloads/month, 1.
 ## Installation
 
 ```bash
-pip install termpaint
+pip install chromapaint
 ```
 
 **Requires Python 3.9+.**
@@ -30,29 +30,29 @@ pip install termpaint
 ## Quickstart
 
 ```python
-import termpaint
-from termpaint import Fore, Back, Style
+import chromapaint
+from chromapaint import Fore, Back, Style
 
-termpaint.init()
+chromapaint.init()
 
 print(Fore.RED + "Error: something went wrong" + Style.RESET_ALL)
 print(Back.GREEN + Fore.WHITE + "  OK  " + Style.RESET_ALL)
 print(Style.BRIGHT + "Bold text" + Style.RESET_ALL)
 
 # Auto-reset after each print
-termpaint.init(autoreset=True)
+chromapaint.init(autoreset=True)
 print(Fore.CYAN + "This resets automatically")
 print("Normal text again")
 
-termpaint.deinit()
+chromapaint.deinit()
 ```
 
 ### just_fix_windows_console() — recommended for most projects
 
 ```python
-import termpaint
+import chromapaint
 
-termpaint.just_fix_windows_console()  # No-op on POSIX, enables ANSI on Windows
+chromapaint.just_fix_windows_console()  # No-op on POSIX, enables ANSI on Windows
 
 print("\033[32mGreen text\033[0m")
 ```
@@ -60,7 +60,7 @@ print("\033[32mGreen text\033[0m")
 ### Context manager
 
 ```python
-from termpaint import Fore, Style, colorama_text
+from chromapaint import Fore, Style, colorama_text
 
 with colorama_text(autoreset=True):
     print(Fore.YELLOW + "Inside block, autoreset on")
@@ -71,7 +71,7 @@ with colorama_text(autoreset=True):
 
 ### Initialization
 
-#### `termpaint.init(autoreset=False, convert=None, strip=None, wrap=True)`
+#### `chromapaint.init(autoreset=False, convert=None, strip=None, wrap=True)`
 
 Wraps `sys.stdout` and `sys.stderr` with ANSI-processing stream wrappers.
 
@@ -82,24 +82,24 @@ Wraps `sys.stdout` and `sys.stderr` with ANSI-processing stream wrappers.
 | `strip` | `bool \| None` | `None` | Force strip ANSI codes (`True`/`False`) or auto-detect (`None`) |
 | `wrap` | `bool` | `True` | If `False`, skip stream wrapping entirely |
 
-#### `termpaint.deinit()`
+#### `chromapaint.deinit()`
 
 Restore original `sys.stdout` and `sys.stderr`. Safe to call multiple times.
 
-#### `termpaint.reinit()`
+#### `chromapaint.reinit()`
 
 Re-initialize after a `deinit()`. No-op if already initialized.
 
-#### `termpaint.just_fix_windows_console()`
+#### `chromapaint.just_fix_windows_console()`
 
 The recommended modern alternative to `init()`. On Windows 10+, enables native VT processing; falls back to stream wrapping if unavailable. No-op on POSIX. Idempotent.
 
-#### `termpaint.colorama_text(**kwargs)`
+#### `chromapaint.colorama_text(**kwargs)`
 
 Context manager version of `init()`/`deinit()`. Accepts the same keyword arguments as `init()`.
 
 ```python
-with termpaint.colorama_text(autoreset=True):
+with chromapaint.colorama_text(autoreset=True):
     print(Fore.GREEN + "colored")
 ```
 
@@ -108,7 +108,7 @@ with termpaint.colorama_text(autoreset=True):
 ### Foreground Colors — `Fore`
 
 ```python
-from termpaint import Fore
+from chromapaint import Fore
 
 Fore.BLACK    # \033[30m
 Fore.RED      # \033[31m
@@ -130,7 +130,7 @@ Fore.LIGHTMAGENTA_EX  # \033[95m
 Fore.LIGHTCYAN_EX     # \033[96m
 Fore.LIGHTWHITE_EX    # \033[97m
 
-# Extended colors (termpaint extensions)
+# Extended colors (chromapaint extensions)
 Fore.color256(214)        # 256-color palette (0–255)
 Fore.rgb(255, 165, 0)     # True color (24-bit)
 ```
@@ -142,7 +142,7 @@ Fore.rgb(255, 165, 0)     # True color (24-bit)
 Same attributes as `Fore` but for background (SGR codes 40–49, 100–107).
 
 ```python
-from termpaint import Back
+from chromapaint import Back
 
 Back.RED                  # \033[41m
 Back.color256(52)         # 256-color background
@@ -154,7 +154,7 @@ Back.rgb(0, 0, 128)       # True color background
 ### Styles — `Style`
 
 ```python
-from termpaint import Style
+from chromapaint import Style
 
 Style.BRIGHT    # \033[1m  — bold / bright
 Style.DIM       # \033[2m  — dim / faint
@@ -169,7 +169,7 @@ Style.RESET_ALL # \033[0m  — reset everything
 `Cursor` methods return escape sequences; write them to stdout.
 
 ```python
-from termpaint import Cursor
+from chromapaint import Cursor
 import sys
 
 sys.stdout.write(Cursor.UP(3))        # Move up 3 lines
@@ -186,7 +186,7 @@ All methods default to `n=1`; `POS` defaults to `x=1, y=1`.
 ### Utility Functions
 
 ```python
-from termpaint import code_to_chars, set_title, clear_screen, clear_line
+from chromapaint import code_to_chars, set_title, clear_screen, clear_line
 
 code_to_chars(31)     # '\033[31m'  — SGR code to ANSI string
 set_title("My App")   # '\033]2;My App\007'  — set terminal window title
@@ -199,7 +199,7 @@ clear_line(2)         # '\033[2K'  — erase line (modes: 0=to end, 1=to start, 
 ### Color Capability Detection
 
 ```python
-from termpaint.environ import detect_color_support, is_no_color, is_force_color
+from chromapaint.environ import detect_color_support, is_no_color, is_force_color
 
 level = detect_color_support()
 # Returns:
@@ -219,7 +219,7 @@ if level >= 3:
 ### Constants
 
 ```python
-from termpaint import CSI, OSC, BEL
+from chromapaint import CSI, OSC, BEL
 
 CSI  # '\033['  — Control Sequence Introducer
 OSC  # '\033]'  — Operating System Command
@@ -233,10 +233,10 @@ BEL  # '\007'   — Bell character
 ### 256-Color Palette
 
 ```python
-import termpaint
-from termpaint import Fore, Back, Style
+import chromapaint
+from chromapaint import Fore, Back, Style
 
-termpaint.just_fix_windows_console()
+chromapaint.just_fix_windows_console()
 
 for i in range(256):
     print(f"{Fore.color256(i)}{i:>4}{Style.RESET_ALL}", end="")
@@ -247,10 +247,10 @@ for i in range(256):
 ### True Color (24-bit)
 
 ```python
-import termpaint
-from termpaint import Fore, Style
+import chromapaint
+from chromapaint import Fore, Style
 
-termpaint.just_fix_windows_console()
+chromapaint.just_fix_windows_console()
 
 # RGB gradient
 for r in range(0, 256, 32):
@@ -272,12 +272,12 @@ for r in range(0, 256, 32):
 
 ## Windows Support
 
-termpaint uses a two-tier strategy on Windows:
+chromapaint uses a two-tier strategy on Windows:
 
 1. **VT processing (Windows 10 1511+):** Calls `SetConsoleMode` to enable `ENABLE_VIRTUAL_TERMINAL_PROCESSING`. ANSI codes pass through natively. This is the preferred path.
-2. **Win32 API fallback:** For older Windows or consoles that don't support VT processing, termpaint translates ANSI sequences into `SetConsoleTextAttribute`, `SetConsoleCursorPosition`, and related Win32 calls at runtime via `ctypes`.
+2. **Win32 API fallback:** For older Windows or consoles that don't support VT processing, chromapaint translates ANSI sequences into `SetConsoleTextAttribute`, `SetConsoleCursorPosition`, and related Win32 calls at runtime via `ctypes`.
 
-Call `just_fix_windows_console()` at startup and termpaint handles the rest automatically.
+Call `just_fix_windows_console()` at startup and chromapaint handles the rest automatically.
 
 ---
 
@@ -291,7 +291,7 @@ import colorama
 colorama.init()
 
 # After — one line changed, everything else stays the same
-import termpaint as colorama
+import chromapaint as colorama
 colorama.init()
 ```
 
@@ -304,16 +304,16 @@ from colorama import Fore, Back, Style
 colorama.init()
 
 # After
-import termpaint
-from termpaint import Fore, Back, Style
-termpaint.init()
+import chromapaint
+from chromapaint import Fore, Back, Style
+chromapaint.init()
 ```
 
 All `Fore.*`, `Back.*`, `Style.*`, and `Cursor.*` values are identical to colorama. All `init()`, `deinit()`, `reinit()`, `just_fix_windows_console()`, and `colorama_text()` signatures are compatible.
 
 ### What's new vs colorama
 
-| Feature | colorama | termpaint |
+| Feature | colorama | chromapaint |
 |---------|----------|-----------|
 | Python 3.9+ only | No (supports 2.7) | Yes |
 | Type annotations | No | Yes (mypy-strict) |

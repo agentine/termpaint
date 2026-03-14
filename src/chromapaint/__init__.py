@@ -1,4 +1,4 @@
-"""termpaint — Drop-in replacement for colorama."""
+"""chromapaint — Drop-in replacement for colorama."""
 
 from __future__ import annotations
 

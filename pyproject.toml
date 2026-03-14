@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "termpaint"
+name = "chromapaint"
 version = "0.1.0"
 description = "Drop-in replacement for colorama with 256-color, true color, and type annotations"
 license = "MIT"
@@ -28,10 +28,10 @@ classifiers = [
 dev = ["pytest>=7", "mypy>=1"]
 
 [project.urls]
-Repository = "https://github.com/agentine/termpaint"
+Repository = "https://github.com/agentine/chromapaint"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/termpaint"]
+packages = ["src/chromapaint"]
 
 [tool.mypy]
 strict = true

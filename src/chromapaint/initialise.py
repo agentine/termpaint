@@ -1,4 +1,4 @@
-"""Initialization and deinitialization of termpaint."""
+"""Initialization and deinitialization of chromapaint."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ def init(
     strip: bool | None = None,
     wrap: bool = True,
 ) -> None:
-    """Initialize termpaint. On Windows, wraps stdout/stderr."""
+    """Initialize chromapaint. On Windows, wraps stdout/stderr."""
     global _original_stdout, _original_stderr, _wrapped
 
     with _lock:

@@ -5,10 +5,10 @@ from __future__ import annotations
 import sys
 from unittest import mock
 
-import termpaint
-from termpaint import init, deinit, reinit, just_fix_windows_console, colorama_text
-from termpaint.ansitowin32 import StreamWrapper
-from termpaint import initialise
+import chromapaint
+from chromapaint import init, deinit, reinit, just_fix_windows_console, colorama_text
+from chromapaint.ansitowin32 import StreamWrapper
+from chromapaint import initialise
 
 
 class TestInit:

@@ -1,7 +1,7 @@
 """Tests for __init__ module exports and stub functions."""
 
-import termpaint
-from termpaint import (
+import chromapaint
+from chromapaint import (
     Fore,
     Back,
     Style,
@@ -23,7 +23,7 @@ from termpaint import (
 
 class TestExports:
     def test_version(self) -> None:
-        assert termpaint.__version__ == "0.1.0"
+        assert chromapaint.__version__ == "0.1.0"
 
     def test_fore_exported(self) -> None:
         assert Fore.RED == "\033[31m"

@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from unittest import mock
 
-from termpaint.environ import is_no_color, is_force_color, detect_color_support
+from chromapaint.environ import is_no_color, is_force_color, detect_color_support
 
 
 class TestNoColor:
@@ -77,7 +77,7 @@ class TestDetectColorSupport:
 
     def test_empty_env_with_tty(self) -> None:
         with mock.patch.dict(os.environ, {}, clear=True):
-            with mock.patch("termpaint.environ.platform") as mock_platform:
+            with mock.patch("chromapaint.environ.platform") as mock_platform:
                 mock_platform.system.return_value = "Linux"
                 mock_stdout = mock.MagicMock()
                 mock_stdout.isatty.return_value = True

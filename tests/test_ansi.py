@@ -1,7 +1,7 @@
 """Tests for ANSI constants, utility functions, and color extensions."""
 
-from termpaint import Fore, Back, Style, Cursor
-from termpaint.ansi import (
+from chromapaint import Fore, Back, Style, Cursor
+from chromapaint.ansi import (
     CSI,
     OSC,
     BEL,

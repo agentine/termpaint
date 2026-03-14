@@ -2,7 +2,7 @@
 
 ## [0.1.0] — 2026-03-14
 
-Initial release of termpaint — a drop-in replacement for [colorama](https://github.com/tartley/colorama) with modern Python support, type annotations, and extended color capabilities.
+Initial release of chromapaint — a drop-in replacement for [colorama](https://github.com/tartley/colorama) with modern Python support, type annotations, and extended color capabilities.
 
 ### Features
 
@@ -47,4 +47,4 @@ Initial release of termpaint — a drop-in replacement for [colorama](https://gi
 - Tests run on Ubuntu, Windows, macOS against Python 3.9–3.13 (145 tests)
 - mypy strict type checking on Python 3.12
 
-[0.1.0]: https://github.com/agentine/termpaint/releases/tag/v0.1.0
+[0.1.0]: https://github.com/agentine/chromapaint/releases/tag/v0.1.0
